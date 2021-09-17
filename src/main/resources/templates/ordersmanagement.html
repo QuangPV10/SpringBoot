@@ -1,0 +1,229 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<div th:replace="common/user/css.html"></div>
+<title>ORDERS MANAGEMENT</title>
+<!-- profile.css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/user/css/profile.css}">
+</head>
+
+<body>
+	<div id="page" style="overflow-x: visible;">
+		<!-- Begin Main -->
+		<div th:replace="common/user/header.html"></div>
+
+		<div class="colorlib-product">
+
+			<div class="container">
+				<div class="row">
+					<div th:replace="common/user/tabinformation.html"></div>
+					<div class="col-lg-9 col-xl-9">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-md-12 pills">
+										<div class="bd-example bd-example-tabs">
+											<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+
+												<li class="nav-item"><a class="nav-link active"
+													th:text="#{inPro}" id="toship" data-toggle="pill"
+													href="#pills-manufacturer" role="tab"
+													aria-controls="pills-manufacturer" aria-expanded="true">IN
+														PROGRESS</a></li>
+												<li class="nav-item"><a class="nav-link" id="toreceive"
+													th:text="#{toShip}" data-toggle="pill"
+													href="#pills-manufacturer1" role="tab"
+													aria-controls="pills-manufacturer1" aria-expanded="true">TO
+														SHIP</a></li>
+
+												<li class="nav-item"><a class="nav-link" id="completed"
+													th:text="#{orderhistory}" data-toggle="pill"
+													href="#pills-manufacturer2" role="tab"
+													aria-controls="pills-manufacturer2" aria-expanded="true">ODER
+														HISTORY</a></li>
+
+											</ul>
+
+											<div class="tab-content" id="pills-tabContent">
+
+
+												<div class="tab-pane border fade show active	"
+													id="pills-manufacturer" role="tabpanel"
+													aria-labelledby="toship">
+													<div class="profile" th:each="order : ${ordersInProgress}">
+														<div class="row">
+															<div class="col-75">
+																<label for="ordercode" th:text="#{orderCode}">Order
+																	Code </label> <span style="color: red" th:text=${order.id}>#123</span>
+
+															</div>
+															<div class="col-25">
+
+																<a th:href="@{/order-detail?order=}+${order.id}">
+																	<button class="btn btn-warning btn-xs"
+																		th:text="#{showDetail}">Show Detail Order</button>
+																</a>
+															</div>
+															<div class="col-75">
+
+																<span th:text="#{dateOr}">Date Order :</span>
+
+																<h5
+																	th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}">
+																</h5>
+
+
+																<span th:text="#{status}">Status :</span>
+																<h5 th:text=${order.orderStatus}></h5>
+															</div>
+															<div class="col-25">
+																<span th:text="#{total}">Total :</span> <span
+																	style="color: red; font-size: 20px; font-weight: bold"
+																	th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 2, 'POINT')}"></span>
+															</div>
+														</div>
+														<hr>
+
+													</div>
+
+
+													<div class="text-center mt-3">
+														<div th:if="${#lists.isEmpty(ordersInProgress)}">
+															<h2>You haven't orders !!!</h2>
+														</div>
+
+
+													</div>
+
+												</div>
+
+
+												<div class="tab-pane border fade" id="pills-manufacturer1"
+													role="tabpanel" aria-labelledby="toreceive">
+
+													<div class="profile" th:each="order : ${ordersInShip}">
+														<div class="row">
+															<div class="col-75">
+																<label for="ordercode" th:text="#{orderCode}">Order
+																	Code </label> <span style="color: red" th:text=${order.id}>#123</span>
+
+															</div>
+															<div class="col-25">
+
+																<a th:href="@{/order-detail?order=}+${order.id}">
+																	<button class="btn btn-warning btn-xs"
+																		th:text="#{showDetail}">Show Detail Order</button>
+																</a>
+															</div>
+															<div class="col-75">
+
+																<span th:text="#{dateOr}">Date Order :</span>
+
+																<h5
+																	th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}">
+																</h5>
+
+
+																<span th:text="#{status}">Status :</span>
+																<h5 th:text=${order.orderStatus}></h5>
+															</div>
+															<div class="col-25">
+																<span th:text="#{total}">Total :</span> <span
+																	style="color: red; font-size: 20px; font-weight: bold"
+																	th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 2, 'POINT')}"></span>
+															</div>
+														</div>
+														<hr>
+
+
+
+													</div>
+
+													<div class="text-center mt-3">
+														<div th:if="${#lists.isEmpty(ordersInShip)}">
+															<h2>You haven't orders !!!</h2>
+														</div>
+
+
+													</div>
+
+
+
+												</div>
+												<div class="tab-pane border fade" id="pills-manufacturer2"
+													role="tabpanel" aria-labelledby="completed">
+
+													<div class="profile" th:each="order : ${ordersInDone}">
+														<div class="row">
+															<div class="col-75">
+																<label for="ordercode" th:text="#{orderCode}">Order
+																	Code </label> <span style="color: red" th:text=${order.id}>#123</span>
+
+															</div>
+															<div class="col-25">
+
+																<a th:href="@{/order-detail?order=}+${order.id}">
+																	<button class="btn btn-warning btn-xs"
+																		th:text="#{showDetail}">Show Detail Order</button>
+																</a>
+															</div>
+															<div class="col-75">
+
+																<span th:text="#{dateOr}">Date Order :</span>
+
+																<h5
+																	th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}">
+																</h5>
+
+
+																<span th:text="#{status}">Status :</span>
+																<h5 th:text=${order.orderStatus}></h5>
+															</div>
+															<div class="col-25">
+																<span th:text="#{total}">Total :</span> <span
+																	style="color: red; font-size: 20px; font-weight: bold"
+																	th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 2, 'POINT')}"></span>
+															</div>
+														</div>
+														<hr>
+
+													</div>
+
+													<div class="text-center mt-3">
+														<div th:if="${#lists.isEmpty(ordersInDone)}">
+															<h2>You haven't orders !!!</h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<br>
+	<br>
+
+	<!-- Begin Featured Agents -->
+
+	<!-- End Main -->
+
+	<!-- Begin footer -->
+
+	<!-- End footer -->
+
+
+	<div th:replace="common/user/js.html"></div>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+input[type=text], select, textarea {
+	width: 93%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+}
+
+input[type=password], select, textarea {
+	width: 93%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+}
+input[type=number], select, textarea {
+	width: 93%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+}
+
+label {
+	padding: 2px 2px 2px 0;
+	display: inline-block;
+}
+
+input[type=submit]:hover {
+	background-color: #45a049;
+}
+
+.col-25 {
+	padding-left: 4%;
+	float: left;
+	width: 25%;
+	margin-top: 6px;
+}
+
+.col-s {
+	padding-left: 4%;
+	float: right;
+	width: 25%;
+	margin-top: 6px;
+}
+
+.test {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border: 0;
+	border-top: 2px solid
+}
+
+.col-75 {
+	float: left;
+	width: 75%;
+	margin-top: 6px;
+}
+
+.col-20 {
+	padding-left: 4%;
+	float: left;
+	width: 20%;
+	margin-top: 6px;
+}
+
+.col-60 {
+	padding-left: 4%;
+	float: left;
+	width: 60%;
+	margin-top: 6px;
+}
+
+.col-40 {
+	padding-right: 4%;
+	float: right;
+	width: 40%;
+	margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+

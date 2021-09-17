@@ -1,0 +1,114 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<div th:replace="common/user/css.html"></div>
+<title>Log in</title>
+</head>
+<body>
+	<div id="page">
+		<!-- Begin Main -->
+		<div th:replace="common/user/header.html"></div>
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread" style="text-align: center">
+							<span><a href="index.html" th:text="#{home}">Home</a></span> / <span
+								th:text="#{login}">Login</span>
+						</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="colorlib-product">
+			<div class="container">
+				 <span>
+					<p th:text="${message}" style="color: green">12</p>
+				</span> 
+
+				<div class="row">
+					<div class="col-lg-7">
+
+						<form th:action="@{/dang-nhap}" name='login-form' method="post"
+							class="colorlib-form">
+							<h2 style="text-align: center">LOGIN FORM</h2>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label th:text="#{username}">User name</label> <input type="text" id=""
+											name="username" class="form-control">
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label th:text="#{password}" >Password</label> <input type="password" id=""
+											name="password" class="form-control">
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<label th:text="#{rememberMe}">Remember me?</label> <input type="checkbox"
+												id="rememberme">
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-8 text-center">
+											<p>
+												<button type="submit" class="btn btn-primary" th:text="#{signIn}">SIGN
+													IN</button>
+											</p>
+										</div>
+										<a th:href="@{/quen-mat-khau}" th:text="#{forgotpassword}"> Forgot your password? </a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-lg-5">
+						<div class="col">
+							<div class="col-md-15">
+								<div class="cart-detail">
+									<h2  th:text="#{newcustomer}">NEW CUSTOMER?</h2>
+									<ul>
+										<li>Create an account with us and you'll be able to:</li>
+										<li>Check out faster</li>
+										<li>Save multiple shipping addresses</li>
+										<li>Access your order history</li>
+										<li>Track new orders</li>
+										<li>Save items to your Wish List</li>
+									</ul>
+									<br>
+									<div class="row" style="padding: 6.5%;">
+										<br>
+										<div class="col-md-12 text-center">
+											<p>
+												<a th:href="@{/dang-ky}" class="btn btn-primary" th:text="#{createaccount}">CREATE
+													ACCOUNT</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Begin Featured Agents -->
+
+		<!-- End Main -->
+
+		<!-- Begin footer -->
+		<div th:replace="common/user/footer.html"></div>
+		<!-- End footer -->
+
+	</div>
+	<div th:replace="common/user/js.html"></div>
+</body>
+</html>

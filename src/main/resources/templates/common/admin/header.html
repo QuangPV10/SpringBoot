@@ -1,0 +1,135 @@
+<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+	<div class="navbar-brand-wrapper d-flex justify-content-center">
+		<div
+			class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+			<a class="navbar-brand brand-logo" href="admin_index.html"><img
+				src="logo.png" alt="logo" /></a>
+
+			<button class="navbar-toggler navbar-toggler align-self-center"
+				type="button" data-toggle="minimize">
+				<span class="mdi mdi-sort-variant"></span>
+			</button>
+		</div>
+	</div>
+	<div
+		class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+		<ul class="navbar-nav mr-lg-4 w-100">
+			<li class="nav-item nav-search d-none d-lg-block w-100">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="search"> <i
+							class="mdi mdi-magnify"></i>
+						</span>
+					</div>
+					<input type="text" class="form-control" placeholder="Search"
+						aria-label="search" aria-describedby="search">
+				</div>
+			</li>
+		</ul>
+		<ul class="navbar-nav navbar-nav-right">
+			<li class="nav-item dropdown mr-1"><a
+				class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
+				id="messageDropdown" href="#" data-toggle="dropdown"> <i
+					class="mdi mdi-message-text mx-0"></i> <span class="count"></span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+					aria-labelledby="messageDropdown">
+					<p class="mb-0 font-weight-normal float-left dropdown-header">Message</p>
+
+
+				</div></li>
+			<li class="nav-item dropdown mr-4"><a
+				class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown"
+				id="notificationDropdown" href="#" data-toggle="dropdown"> <i
+					class="mdi mdi-bell mx-0"></i> <span class="count"></span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+					aria-labelledby="notificationDropdown">
+					<p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+
+
+				</div></li>
+			<li class="nav-item nav-profile dropdown"><a
+				class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+				id="profileDropdown"> <img src="logo.png" alt="profile" /> <span
+					class="nav-profile-name"> Admin</span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+					aria-labelledby="profileDropdown">
+
+					<form th:action="@{/logout}" method="post">
+						<button type="submit" class="dropdown-item">
+							<i class="mdi mdi-logout text-primary"></i> Log out
+						</button>
+
+					</form>
+
+				</div></li>
+		</ul>
+		<button
+			class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+			type="button" data-toggle="offcanvas">
+			<span class="mdi mdi-menu"></span>
+		</button>
+	</div>
+</nav>
+
+<div class="container-fluid page-body-wrapper">
+	<!-- partial:partials/_sidebar.html -->
+	<nav class="sidebar sidebar-offcanvas" id="sidebar">
+		<ul class="nav">
+			<li class="nav-item"
+				th:classappend="${#httpServletRequest.getRequestURI().endsWith('home') ? 'active':''}"><a
+				class="nav-link" th:href="@{/admin/home}"> <i
+					class="mdi mdi-home menu-icon"></i> <span class="menu-title">Statistical</span>
+			</a></li>
+
+
+			<li class="nav-item"
+				th:classappend="${#httpServletRequest.getRequestURI().endsWith('orders-management') ? 'active':''}">
+				<a class="nav-link" data-toggle="collapse" href="#ui-basic"
+				aria-expanded="false" aria-controls="ui-basic"> <i
+					class="mdi mdi-circle-outline menu-icon"></i> <span
+					class="menu-title">Orders Management </span> <i class="menu-arrow"></i>
+			</a>
+				<div class="collapse" id="ui-basic">
+					<ul class="nav flex-column sub-menu">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/admin/orders-management}">Status InProgress</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/admin/orders-toship}">Status ToShip</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/admin/orders-done}">Status Done</a></li>
+					</ul>
+				</div>
+			</li>
+			<li class="nav-item"
+				th:classappend="${#httpServletRequest.getRequestURI().endsWith('users-management') ? 'active':''}"><a
+				class="nav-link" th:href="@{/admin/users-management}"> <i
+					class="mdi mdi-chart-pie menu-icon"></i> <span class="menu-title">Users
+						Management</span>
+			</a></li>
+
+			<li class="nav-item"
+				th:classappend="${#httpServletRequest.getRequestURI().endsWith('products-management') ? 'active':''}"><a
+				class="nav-link" th:href="@{/admin/products-management}"> <i
+					class="mdi mdi-chart-pie menu-icon"></i> <span class="menu-title">Products
+						Management</span>
+			</a></li>
+
+			<!-- 	<li class="nav-item"><a class="nav-link"
+			th:href="@{/admin/comments-management}"> <i
+					class="mdi mdi-chart-pie menu-icon"></i> <span class="menu-title">Comments
+						Management</span>
+			</a></li> -->
+			<li class="nav-item "><a class="nav-link"
+				th:href="@{/trang-chu}"> <i
+					class="mdi mdi-arrow-right-bold menu-icon"></i> <span
+					class="menu-title">Home Page</span>
+			</a></li>
+
+
+
+
+		</ul>
+	</nav>

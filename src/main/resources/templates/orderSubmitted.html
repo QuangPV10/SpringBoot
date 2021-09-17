@@ -1,0 +1,88 @@
+	<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<title>Cart</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<div th:replace="common/user/css.html"></div>
+
+</head>
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<div th:replace="common/user/header.html"></div>
+
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread" style="text-align: center">
+							<span><a href="index.html">Home</a></span> / <span>Shopping
+								Cart</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="colorlib-product">
+			<div class="container">
+
+				<div class="card">
+					<div class="card-body">
+						<div class="text-center py-3">
+							<i data-feather="check-circle" class="text-success" width="48"
+								height="48"></i>
+							<h1>Thank you.</h1>
+							<p>Your order has been placed and will be processed as soon
+								as possible.</p>
+							<p class="mb-0">
+								<span class="text-muted">Order ID: </span> <span
+									class="text-info">#ORD<span th:text="${order.id}"></span></span>
+							</p>
+							<p>
+								<span class="text-muted">Amount: </span> <span class="text-info">$
+									<span th:text="${order.orderTotal}"></span>
+								</span>
+							</p>
+							<p>
+								The estimated delivery date is <span
+									th:text="${#dates.format(order.shippingDate, 'dd-MMM-yyyy')}"></span>
+							</p>
+							<a th:href="@{/san-pham}" class="btn btn-info rounded mb-3">CONTINUE
+								SHOPPING</a> <a th:href="@{/order-detail?order=}+${order.id}"
+								class="btn btn-primary rounded mb-3">VIEW ORDER</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="common/user/footer.html"></div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+	<div th:replace="common/user/js.html"></div>
+
+	<script>
+		$(document).ready(function() {
+			$(".cartItemQty").on('change', function() {
+				var id = this.id;
+				var qty = this.value;
+				$('#newqty').val(qty)
+				$('#newid').val(id)
+				$('#update-item-' + id).css('display', 'inline-block');
+			});
+		});
+	</script>
+
+</body>
+</html>

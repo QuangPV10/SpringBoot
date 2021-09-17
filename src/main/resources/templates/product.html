@@ -1,0 +1,412 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Products</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700"
+	rel="stylesheet">
+
+<div th:replace="common/user/css.html"></div>
+
+</head>
+<body>
+
+	<div class="colorlib-loader"></div>
+	<div id="toast"></div>
+	<div id="page">
+		<div th:replace="common/user/header.html"></div>
+		<form id="filter-form" th:action="@{/san-pham}" method="get">
+			<div class="breadcrumbs">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col" style="text-align: center;">
+							<p class="bread">
+								<span><a href="#" th:text="#{home}">Home</a></span> / <span
+									th:text="#{product}">Product</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="breadcrumbs-two">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="breadcrumbs-img"
+								th:style="'background-image: url(' + @{/images/cover-img-1.jpg} +')'"></div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="colorlib-product">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-2 col-xl-2">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="side border mb-1">
+										<h3 th:text="#{brand}">Brand</h3>
+										<ul th:each="item : ${allBrands}">
+											<input type="checkbox" th:text="${' '+item}">
+											<label for="nike" style="font-size: 16px"></label>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="side border mb-1">
+										<h3 th:text="#{category}">CATEGORY</h3>
+										<ul th:each="item : ${allCategories}">
+											<input type="checkbox" th:text="${' '+item}">
+											<label for="nike" style="font-size: 16px"></label>
+
+										</ul>
+
+
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="side border mb-1">
+										<h3 th:text="#{size}">Size</h3>
+										<div class="block-26 mb-2">
+											<ul th:each="item : ${allSizes}">
+												<li><a th:text="${' '+item}">7</a></li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="side border mb-1">
+										<h3 th:text="#{price}">Price</h3>
+										<input type="text" class="form-control price-input"
+											style="width: 100%; margin-bottom: 0.625rem; font-weight: bold"
+											name="currency-field" id="currency-field"
+											pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
+											data-type="currency" placeholder="From"> <input
+											type="text" class="form-control price-input"
+											style="width: 100%; margin-bottom: 0.625rem; font-weight: bold"
+											name="currency-field" id="currency-field"
+											pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
+											data-type="currency" placeholder="To">
+
+
+										<p>
+											<a href="#" class="btn btn-primary" th:text="#{confirm}">CONFIRM</a>
+										</p>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-10 col-xl-10">
+							<div class="card mb-3">
+								<div
+									class="row card-body d-flex justify-content-between align-items-start py-2">
+
+									<div class="col-8 col-md-7 col-lg-6">
+										<button type="button"
+											class="btn btn-sm btn-outline-primary rounded-pill d-block d-md-none mb-2"
+											data-toggle="modal" data-target="#filterModal">
+											<i data-feather="filter"></i> Filter
+										</button>
+
+									</div>
+
+									<div class="btn-group ml-3">
+										<button type="button"
+											class="btn btn-light btn-sm border rounded-pill"
+											data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false">
+											<th:block th:switch="${filters.sort}">
+												<span id="dropdown-sort-text" th:case="'priceasc'">Low
+													- High Price</span>
+												<span id="dropdown-sort-text" th:case="'pricedesc'">High
+													- Low Price</span>
+												<span id="dropdown-sort-text" th:case="'alphasc'">A -
+													Z Order</span>
+												<span id="dropdown-sort-text" th:case="'alphdesc'">Z
+													- A Order</span>
+												<span id="dropdown-sort-text" th:case="*"
+													th:text="#{newest}">Newest</span>
+											</th:block>
+											<i data-feather="chevron-down"></i>
+										</button>
+										<div class="dropdown-menu dropdown-menu-right shadow-sm">
+											<button class="dropdown-item button-sort" type="button"
+												value="newest" th:text="#{newest}">Newest</button>
+											<button class="dropdown-item button-sort" type="button"
+												value="priceasc" th:text="#{low}">Low - High Price</button>
+											<button class="dropdown-item button-sort" type="button"
+												value="pricedesc" th:text="#{high}">High - Low
+												Price</button>
+											<button class="dropdown-item button-sort" type="button"
+												value="alphasc" th:text="#{azOrder}">A - Z Order</button>
+											<button class="dropdown-item button-sort" type="button"
+												value="alphdesc" th:text="#{zaOrder}">Z - A Order</button>
+										</div>
+									</div>
+									<input id="input-sort" hidden="hidden" type="text" name="sort"
+										th:value="${filters.sort}">
+								</div>
+							</div>
+							<div class="row row-pb-md" id="pagination_data">
+								<div th:each="shoe: ${shoes}" class="col-lg-3 mb-4 text-center">
+									<div class="product-entry border">
+										<img th:src="@{'/images/'+ ${shoe.picture}}"
+											class="img-fluid zoomimg zoomimg"
+											alt="Free html5 bootstrap 4 template">
+
+										<div class="desc">
+											<h2>
+												<a th:href="@{'/chi-tiet-san-pham?id=' + ${shoe.id}}"
+													th:title="${shoe.name}"
+													th:text="${#strings.abbreviate(shoe.name,30)}">Women's
+													Boots Shoes Maca</a>
+											</h2>
+											<span th:text="'$' +${shoe.price}" class="price">$139.00</span>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+
+							<nav aria-label="Page navigation example"
+								th:if="${totalPages > 1}">
+								<ul class="pagination justify-content-end">
+									<li class="page-item"><a
+										th:if="${currentPage < totalPages}" class="page-link"
+										th:href="@{'/san-pham/' + ${totalPages}}" th:text="#{last}" >Last</a> <span
+										class="page-link" th:unless="${currentPage < totalPages}" th:text="#{last}">Last</span></li>
+
+
+									<li class="page-item" style="display: inherit;"><span
+										style="color: red; font-weight: bold"
+										th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
+											class="page-link" th:if="${currentPage != i}"
+											th:href="@{'/san-pham/' + ${i}}">[[${i}]]</a> <span
+											style="color: red; font-weight: bold" class="page-link"
+											th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+									</span></li>
+
+									<li><a class="page-link"
+										th:if="${currentPage < totalPages}"
+										th:href="@{'/san-phan/' + ${currentPage + 1}}" th:text="#{next}">Next</a> <span
+										th:unless="${currentPage < totalPages}">Next</span></li>
+								</ul>
+							</nav>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Pagination -->
+
+
+
+
+			<!-- /Pagination -->
+
+
+			<div class="colorlib-partner">
+				<div class="container">
+					<div class="row">
+						<div
+							class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+							<h2>Trusted Partners</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col partner-col text-center">
+
+
+							<img th:src="@{/images/brand-1.jpg}" class="img-fluid zoomimg"
+								alt="Free html4 bootstrap 4 template">
+						</div>
+						<div class="col partner-col text-center">
+							<img th:src="@{/images/brand-2.jpg}" class="img-fluid zoomimg"
+								alt="Free html4 bootstrap 4 template">
+						</div>
+						<div class="col partner-col text-center">
+							<img th:src="@{/images/brand-3.jpg}" class="img-fluid zoomimg"
+								alt="Free html4 bootstrap 4 template">
+						</div>
+						<div class="col partner-col text-center">
+							<img th:src="@{/images/brand-4.jpg}" class="img-fluid zoomimg"
+								alt="Free html4 bootstrap 4 template">
+						</div>
+						<div class="col partner-col text-center">
+							<img th:src="@{/images/brand-5.jpg}" class="img-fluid zoomimg"
+								alt="Free html4 bootstrap 4 template">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div th:replace="common/user/footer.html"></div>
+		</form>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	<div th:replace="common/user/js.html"></div>
+</body>
+
+<script>
+	var sidebarContent = $('.accordion-sidebar').html()
+	$('#filterModal').on(
+			'show.bs.modal',
+			function() {
+				// move filter contents to modal body
+				$(this).find('.modal-body').html(
+						'<div class="accordion accordion-caret accordion-sidebar accordion-modal">'
+								+ sidebarContent + '</div>')
+				// empty the sidebar filter contents
+				$('.accordion-sidebar:not(.accordion-modal)').html('')
+			})
+	$('#filterModal').on('hidden.bs.modal', function() {
+		$('.accordion-modal').remove() // remove modal filter contents
+		$('.accordion-sidebar').html(sidebarContent) // move filter contents back to the sidebar
+	})
+	$('.button-sort').click(function() {
+		var value = $(this).val()
+		var text = $(this).text()
+		$('#input-sort').val(value)
+		$('#dropdown-sort-text').text(text)
+		$('#filter-form').submit()
+	})
+
+	$(function() {
+		$('#light-pagination').pagination({
+			items : $('#totalitems').val(),
+			itemsOnPage : $('#itemsperpage').val(),
+			currentPage : $('#page').val(),
+			cssStyle : 'light-theme',
+			useAnchors : false,
+			prevText : "<",
+          nextText: ">",
+			displayedPages : 1,
+			edges : 1,
+			onPageClick : function(pageNumber) {
+				$('#page').val(pageNumber)
+				$('#filter-form').submit()
+			}
+		});
+	});
+</script>
+
+
+<script>
+	//Jquery Dependency
+
+	$("input[data-type='currency']").on({
+		keyup : function() {
+			formatCurrency($(this));
+		},
+		blur : function() {
+			formatCurrency($(this), "blur");
+		}
+	});
+
+	function formatNumber(n) {
+		// format number 1000000 to 1,234,567
+		return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	}
+
+	function formatCurrency(input, blur) {
+		// appends $ to value, validates decimal side
+		// and puts cursor back in right position.
+
+		// get input value
+		var input_val = input.val();
+
+		// don't validate empty input
+		if (input_val === "") {
+			return;
+		}
+
+		// original length
+		var original_len = input_val.length;
+
+		// initial caret position 
+		var caret_pos = input.prop("selectionStart");
+
+		// check for decimal
+		if (input_val.indexOf(".") >= 0) {
+
+			// get position of first decimal
+			// this prevents multiple decimals from
+			// being entered
+			var decimal_pos = input_val.indexOf(".");
+
+			// split number by decimal point
+			var left_side = input_val.substring(0, decimal_pos);
+			var right_side = input_val.substring(decimal_pos);
+
+			// add commas to left side of number
+			left_side = formatNumber(left_side);
+
+			// validate right side
+			right_side = formatNumber(right_side);
+
+			// On blur make sure 2 numbers after decimal
+			if (blur === "blur") {
+				right_side += "00";
+			}
+
+			// Limit decimal to only 2 digits
+			right_side = right_side.substring(0, 2);
+
+			// join number by .
+			input_val = "$" + left_side + "." + right_side;
+
+		} else {
+			// no decimal entered
+			// add commas to number
+			// remove all non-digits
+			input_val = formatNumber(input_val);
+			input_val = "$" + input_val;
+
+			// final formatting
+			if (blur === "blur") {
+				input_val += ".00";
+			}
+		}
+
+		// send updated string to input
+		input.val(input_val);
+
+		// put caret back in the right position
+		var updated_len = input_val.length;
+		caret_pos = updated_len - original_len + caret_pos;
+		input[0].setSelectionRange(caret_pos, caret_pos);
+	}
+</script>
+<script>
+	function showSuccesToast() {
+		toast({
+			title : 'SUCCESS',
+			message : 'Add to cart success !!',
+			type : 'success',
+			duration : 1000
+		});
+	};
+</script>
+</html>

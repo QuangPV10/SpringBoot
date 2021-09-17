@@ -1,0 +1,176 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Check out PayPal</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<div th:replace="common/user/css.html"></div>
+</head>
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<div th:replace="common/user/header.html"></div>
+
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread" style="text-align: center">
+							<span><a href="#" th:text="#{home}">Home</a></span> / <span>
+								PayPal</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="colorlib-product">
+			<div class="container">
+
+
+
+				<div class="row">
+
+					<!-- Checkout Info -->
+					<div class="col-lg-8 mb-3">
+						<div th:if="${missingRequiredField}">
+							<h5 class="alert alert-warning">There are some required
+								fields missing.</h5>
+						</div>
+						<div id="accordion">
+							<div class="card">
+								<div class="card-header bg-white" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link checkout-header"
+											data-toggle="collapse" data-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne"
+											th:text="#{reviewItem}">
+											REVIEW ITEMS <i data-feather="chevron-down" class="mb-1"></i>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseOne" class="collapse show"
+									aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body border-bottom">
+										<div class="row align-items-center border-bottom  pb-2 pt-2"
+											th:each="cartItem : ${cartItemList}">
+											<div class="col-12 col-md-6 mb-2">
+												<div class="row align-items-center">
+													<div class="col-4">
+														<a th:href="@{/chi-tiet-san-pham?id=}+${cartItem.shoe.id}"><img
+															class="img-fluid"
+															th:src="@{'/images/'+ ${cartItem.shoe.picture}}"
+															alt="Free html5 bootstrap 4 template"></a>
+													</div>
+													<div class="col-8">
+														<a th:href="@{/chi-tiet-san-pham?id=}+${cartItem.shoe.id}"
+															class="h6 bold d-inline-block"
+															th:text=${cartItem.shoe.name}></a>
+														<div>
+															<i data-feather="check-circle" class="text-success"
+																th:text="#{inStock}"></i>
+														</div>
+														<div>
+															<small><b th:text="#{size}">Size</b>: <span
+																th:text="${cartItem.size}"></span></small>
+														</div>
+														<small><b th:text="#{unitPrice}">Unit Price</b>: $<span
+															th:text="${#numbers.formatDecimal(cartItem.shoe.price, 0, 'COMMA', 2, 'POINT')}"></span></small>
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-md-6 text-right">
+												<span>x<span th:text="${cartItem.qty}"></span> units:
+												</span> <span class="font-weight-bold text-info">$ <span
+													th:id="'price'+${cartItem.id}"
+													th:text="${#numbers.formatDecimal(cartItem.subtotal, 0, 'COMMA', 2, 'POINT')}"></span></span>
+											</div>
+										</div>
+										<div class="text-center mx-auto">
+											<small class="counter" th:text="#{total}">TOTAL</small>
+											<h3 class="font-weight-bold">
+												$ <span
+													th:text="${#numbers.formatDecimal(shoppingCart.getGrandTotal(), 0, 'COMMA', 2, 'POINT')}"></span>
+											</h3>
+										</div>
+										<div
+											class="d-flex flex-wrap justify-content-between align-items-center mt-3">
+											<a th:href="@{/cart}" class="btn btn-info rounded-pill"
+												th:text="#{editcart}"><i data-feather="arrow-left">
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<!--  end accordion -->
+					</div>
+
+
+					<!-- Summary Panel -->
+					<div class="col-lg-4">
+						<form method="post" th:action="@{/pay}">
+							<div class="card">
+								<div class="card-header bg-white checkout-header"
+									th:text="#{orderSum}">ORDER SUMMARY</div>
+								<div class="card-body">
+									<div class="d-flex justify-content-between">
+										<span th:text="#{cartSub}">Cart subtotal</span> <span>$
+											<span
+											th:text="${#numbers.formatDecimal(shoppingCart.getGrandTotal(), 0, 'COMMA', 2, 'POINT')}">
+										</span>
+										</span>
+									</div>
+									<div class="d-flex justify-content-between">
+										<span th:text="#{shipping}">Shipping</span> <span>$0.00</span>
+									</div>
+									<hr>
+									<div class="d-flex justify-content-between">
+										<span th:text="#{total}">Total</span> <span
+											class="font-weight-bold">$ <input type="text" 
+											style="width: 35px; outline: none; border: none"
+											th:value="${shoppingCart.getGrandTotal()}" name="price" /></span>
+									</div>
+								</div>
+
+								<!-- 	<form method="post" th:action="@{/pay}">
+					<input type="text" th:value="${shoppingCart.getGrandTotal()}"
+						name="price" />
+					<button type="submit" class="btn btn-info">Payment with
+						Paypal</button>
+				</form> -->
+								<div class="card-footer bg-white border-top-0">
+									<button type="submit" th:text="#{placeyourorder}"
+										class="btn btn-primary rounded-pill btn-lg btn-block mt-2 mb-3">
+										Place your order</button>
+									<p style="font-size: smaller;">
+										By placing your order, you agree to Shoepp <a href="#">privacy</a>
+										notice and <a href="#">conditions</a>.
+									</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="common/user/footer.html"></div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+	<div th:replace="common/user/js.html"></div>
+
+</body>
+</html>

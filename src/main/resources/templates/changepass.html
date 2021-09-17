@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<div th:replace="common/user/css.html"></div>
+<title>Account</title>
+<!-- profile.css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/user/css/profile.css}">
+</head>
+<body>
+	<div id="page" style="overflow-x: visible;">
+		<!-- Begin Main -->
+		<div th:replace="common/user/header.html"></div>
+
+		<div class="colorlib-product">
+
+			<div class="container">
+				<div class="row">
+					<div th:replace="common/user/tabinformation.html"></div>
+					<div class="col-lg-9 col-xl-9">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-md-12 pills">
+										<div class="bd-example bd-example-tabs">
+											<div class="tab-pane border fade show active"
+												id="pills-description" role="tabpanel"
+												aria-labelledby="update-information-tab">
+												<div class="profile">
+													<form th:action="@{/cap-nhat-mat-khau}" method="post">
+														<span style="text-align: center;">
+															<h4 th:text="${message}" style="color: red">12</h4>
+														</span>
+														<div class="row">
+
+															<div class="col-25">
+																<label for="currentpassword" th:text="#{current}">Current
+																	Password</label>
+															</div>
+															<div class="col-75">
+																<input type="password" name="oldPassword"
+																	placeholder="Enter your old password...."
+																	style="outline: none !important;">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-25">
+																<label for="newpassword" th:text="#{new}">New
+																	Password</label>
+															</div>
+															<div class="col-75">
+																<input type="password" name="newPassword"
+																	id="newPassword"
+																	placeholder="Enter your new password...."
+																	style="outline: none !important;">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-25">
+																<label for="confirmpassword" th:text="#{confirmPass}">Confirm
+																	Password</label>
+															</div>
+															<div class="col-75">
+																<input type="password"
+																	placeholder="Confirm new password" required
+																	oninput="checkPasswordMatch(this);"
+																	style="outline: none !important;">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-25"></div>
+															<div class="col-75">
+																<div class="col-md-10 text-center">
+																	<input type="submit" class="btn btn-primary"
+																		th:value="#{update}" style="width: 30%" value="Update" />
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+	</div>
+	<br>
+	<br>
+
+	<!-- Begin Featured Agents -->
+
+	<!-- End Main -->
+
+	<!-- Begin footer -->
+	<div th:replace="common/user/footer.html"></div>
+	<!-- End footer -->
+
+	</div>
+	<div th:replace="common/user/js.html"></div>
+
+	<script>
+		function checkPasswordMatch(fieldConfirmPassword) {
+			if (fieldConfirmPassword.value != $("#newPassword").val()) {
+				fieldConfirmPassword
+						.setCustomValidity("Passwords do not match!");
+			} else {
+				fieldConfirmPassword.setCustomValidity("");
+			}
+		}
+	</script>
+	<script>
+		// Mong muốn của chúng ta
+		Validator({
+			form : '#update-form',
+			formGroupSelector : '.form-group',
+			errorSelcetor : '.form-message',
+			rules : [ Validator.charactersLength('#phoneNumber', 10) ],
+
+		});
+	</script>
+</body>
+</html>

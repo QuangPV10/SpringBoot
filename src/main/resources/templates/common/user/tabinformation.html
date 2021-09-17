@@ -1,0 +1,39 @@
+
+<div class="col-lg-3 col-xl-3">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="side border mb-1">
+				<div class="profile">
+					<div class="col-25">
+						<img src="images/avatar.png" style="width: 80%" alt="avatar">
+					</div>
+					<div class="col-75">
+						<span style="font-size: 12px">Information Account</span>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="side border mb-1">
+				<ul class="dropdown" style="padding: 2%">
+					<li><a th:href="@{/thay-doi-mat-khau}" class="active"
+						th:text="#{changepass}">Change Pass</a></li>
+					<li><a th:href="@{/tai-khoan}" class="active"
+						th:text="#{updateInfo}">Update Information</a></li>
+					<li><a th:href="@{/quan-ly-don-hang}" th:text="#{orderMana}">Orders
+							Management</a></li>
+
+				</ul>
+				</br>
+
+				<div class="col-md-10 text-center">
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" class="btn btn-primary" style="width: 120%"
+							th:value="#{logout}" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

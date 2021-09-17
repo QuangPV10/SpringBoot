@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>BackEnd</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" th:href="@{/admin/static/css/main.css}"
+	href="../../css/main.css" />
+<link rel="stylesheet" th:href="@{/admin/static/css/highcharts.css}"
+	href="../../css/highcharts.css" />
+<link rel="stylesheet" th:href="@{/admin/static/css/bootstrap.css}"
+	href="../../css/bootstrap.css" />
+
+<script th:src="@{/admin/static/js/jquery-3.2.1.min.js}"
+	src="../../js/jquery-3.2.1.min.js"></script>
+<script th:src="@{/admin/static/js/highcharts.js}"
+	src="../../js/highcharts.js"></script>
+<script th:src="@{/admin/static/js/exporting.js}"
+	src="../../js/exporting.js"></script>
+
+<!-- bootstrap 4.1 -->
+<script type="text/javascript" th:src="@{/user/js/bootstrap.min.js}"></script>
+
+
+
+
+
+
+
+<!-- plugins:css -->
+<div th:replace="common/admin/css.html"></div>
+</head>
+<body>
+	<script type="text/javascript">
+		$(function() {
+			loadFuck1();
+			loadFuck();
+			loadBrowserMarketResult();
+			loadBrowserMarketResult1()
+		});
+		function loadFuck1(params) {
+			$.get("/ajax/fuck1", params, function(data, textStatus, jqXHR) {
+				console.log('textStatus : ' + textStatus);
+				console.log('result : ' + JSON.stringify(data));
+
+				if (textStatus == 'success') {
+
+					$('#fuck1').highcharts({
+						chart : {
+							type : 'column'
+						},
+						title : {
+							text : data.title
+						},
+						xAxis : {
+							categories : data.categories,
+							title : {
+								text : null
+							}
+						},
+						yAxis : {
+							min : 0,
+							title : {
+								text : 'Dollars',
+								align : 'high'
+							},
+							labels : {
+								overflow : 'justify'
+							}
+						},
+						tooltip : {
+							valueSuffix : ' USD'
+						},
+						plotOptions : {
+							bar : {
+								dataLabels : {
+									enabled : true
+								}
+							}
+						},
+						legend : {
+							layout : 'horizontal',
+							align : 'right',
+							verticalAlign : 'top',
+							x : -40,
+							y : 80,
+							floating : true,
+							borderWidth : 1,
+							backgroundColor : '#FAFAFA',
+							shadow : true
+						},
+						credits : {
+							enabled : false
+						},
+						series : data.series
+					});
+				} else {
+					console.log('Unable to retrive data');
+				}
+
+			});
+		}
+
+		function loadFuck(params) {
+			$.get("/ajax/fuck", params, function(data, textStatus, jqXHR) {
+				console.log('textStatus : ' + textStatus);
+				console.log('result : ' + JSON.stringify(data));
+
+				if (textStatus == 'success') {
+
+					$('#fuck').highcharts({
+						chart : {
+							type : 'column'
+						},
+						title : {
+							text : data.title
+						},
+						xAxis : {
+							categories : data.categories,
+							title : {
+								text : null
+							}
+						},
+						yAxis : {
+							min : 0,
+							title : {
+								text : 'Amount Product',
+								align : 'high'
+							},
+							labels : {
+								overflow : 'justify'
+							}
+						},
+						tooltip : {
+							valueSuffix : ' product'
+						},
+						plotOptions : {
+							bar : {
+								dataLabels : {
+									enabled : true
+								}
+							}
+						},
+						legend : {
+							layout : 'horizontal',
+							align : 'right',
+							verticalAlign : 'top',
+							x : -40,
+							y : 80,
+							floating : true,
+							borderWidth : 1,
+							backgroundColor : '#FAFAFA',
+							shadow : true
+						},
+						credits : {
+							enabled : false
+						},
+						series : data.series
+					});
+				} else {
+					console.log('Unable to retrive data');
+				}
+
+			});
+		}
+
+		function loadBrowserMarketResult(params) {
+			$
+					.get(
+							"/ajax/browser_market_result",
+							params,
+							function(data, textStatus, jqXHR) {
+								console.log('textStatus : ' + textStatus);
+								console.log('result : ' + JSON.stringify(data));
+
+								if (textStatus == 'success') {
+
+									$('#pieChartContainer')
+											.highcharts(
+													{
+														chart : {
+															plotBackgroundColor : null,
+															plotBorderWidth : null,
+															plotShadow : false,
+															type : 'pie'
+														},
+														title : {
+															text : data.title
+														},
+														tooltip : {
+															pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+														},
+														plotOptions : {
+															pie : {
+																allowPointSelect : true,
+																cursor : 'pointer',
+																dataLabels : {
+																	enabled : true,
+																	format : '<b>{point.name}</b>: {point.percentage:.1f} %',
+																	style : {
+																		color : 'black'
+																	}
+																}
+															}
+														},
+														series : data.series
+													});
+								} else {
+									console.log('Unable to retrive data');
+								}
+
+							});
+		}
+
+		function loadBrowserMarketResult1(params) {
+			$.get("/ajax/browser_market_result1", params, function(data,
+					textStatus, jqXHR) {
+				console.log('textStatus : ' + textStatus);
+				console.log('result : ' + JSON.stringify(data));
+
+				if (textStatus == 'success') {
+
+					$('#pieChartContainer1').highcharts({
+						chart : {
+							plotBackgroundColor : null,
+							plotBorderWidth : null,
+							plotShadow : false,
+							type : 'line'
+						},
+						title : {
+							text : data.title
+						},
+						tooltip : {
+							valueSuffix : ' USD'
+
+						},
+						plotOptions : {
+							line : {
+								allowPointSelect : true,
+								cursor : 'pointer',
+								dataLabels : {
+									enabled : true,
+									style : {
+										color : 'black'
+									}
+								}
+							}
+						},
+						series : data.series
+					});
+				} else {
+					console.log('Unable to retrive data');
+				}
+
+			});
+		}
+	</script>
+
+	<!-- partial:../../partials/_navbar.html -->
+	<div th:replace="common/admin/header.html"></div>
+
+	<div id="wrapper">
+
+
+
+
+		<!-- <div id="pieChartContainer"></div> -->
+		<div class="container">
+
+			<ul class="nav nav-pills">
+				<li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+				<li><a data-toggle="pill" href="#menu1">Statiscal By Year</a></li>
+				<li><a data-toggle="pill" href="#menu2">Statiscal By Month</a></li>
+				<li><a data-toggle="pill" href="#menu3">Statiscal Pie
+						Gender</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade ">
+					<div id="fuck1"></div>
+
+				</div>
+				<div id="menu1" class="tab-pane fade in active">
+
+					<div id="fuck"></div>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<div id="pieChartContainer1"></div>
+				</div>
+				<div id="menu3" class="tab-pane fade">
+					<div id="pieChartContainer"></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+	</div>
+	<script th:src="@{/js/bootstrap.min.js}"
+		src="../../js/bootstrap.min.js"></script>
+</head>
+<body>
+</html>
+

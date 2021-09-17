@@ -1,0 +1,335 @@
+
+<head>
+<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<div th:replace="common/user/css.html"></div>
+</head>
+<body>
+
+	<!-- <div class="colorlib-loader"></div> -->
+	<div id="page">
+		<div th:replace="common/user/header.html"></div>
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+					<li style="background-image: url(images/banner/fqas-banner.png);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">FootWear</h1>
+											<h2 class="head-2">Shoes</h2>
+											<h2 class="head-3">Collection</h2>
+											<p class="category">
+												<span>New trending shoes</span>
+											</p>
+											<p>
+												<a href="#" class="btn btn-primary"
+													th:text="#{shopColection}"></a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url(images/banner/news-banner.png);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">Huge</h1>
+											<h2 class="head-2">Sale</h2>
+											<h2 class="head-3">
+												<strong class="font-weight-bold">50%</strong> Off
+											</h2>
+											<p class="category">
+												<span>Big sale sandals</span>
+											</p>
+											<p>
+												<a href="#" class="btn btn-primary"
+													th:text="#{shopColection}">Shop Collection</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url(images/banner/fqas-banner.png);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">FootWear</h1>
+											<h2 class="head-2">Shoes</h2>
+											<h2 class="head-3">Collection</h2>
+											<p class="category">
+												<span>New trending shoes</span>
+											</p>
+											<p>
+												<a href="#" class="btn btn-primary"
+													th:text="#{shopColection}">Shop Collection</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url(images/banner/news-banner.png);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">Huge</h1>
+											<h2 class="head-2">Sale</h2>
+											<h2 class="head-3">
+												<strong class="font-weight-bold">50%</strong> Off
+											</h2>
+											<p class="category">
+												<span>Big sale sandals</span>
+											</p>
+											<p>
+												<a href="#" class="btn btn-primary"
+													th:text="#{shopColection}">Shop Collection</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<div id="toast"></div>
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+						<h2 th:text="#{bestSellers}">Best Seller</h2>
+					</div>
+				</div>
+				<div class="row row-pb-md">
+
+
+
+					<div th:each="shoe: ${shoeRandom}"
+						class="col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<img th:src="@{'/images/'+ ${shoe.picture}}"
+								class="img-fluid zoomimg zoomimg"
+								alt="Free html5 bootstrap 4 template">
+
+							<div class="desc">
+								<h2>
+									<a th:href="@{'/chi-tiet-san-pham?id=' + ${shoe.id}}"
+										th:title="${shoe.name}"
+										th:text="${#strings.abbreviate(shoe.name,30)}"
+										style="width: 20px; overflow: hidden; text-overflow: ellipsis;">Women's
+										Boots Shoes Maca</a>
+								</h2>
+								<span th:text="'$' +${shoe.price}" class="price">$139.00</span>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p>
+							<a th:href="@{/san-pham}" class="btn btn-primary btn-lg"
+								th:text="#{shopAllProducts}">Shop All Products</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img class="img-fluid" id="promo-banner-3"
+			src="images/banner/promo-banner-3-lg.png" alt="promo-banner-3">
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+						<h2>New Products</h2>
+					</div>
+				</div>
+
+				<div class="row row-pb-md">
+
+					<div th:each="shoe: ${shoeByDate}"
+						class="col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<img th:src="@{'/images/'+ ${shoe.picture}}"
+								class="img-fluid zoomimg zoomimg"
+								alt="Free html5 bootstrap 4 template">
+
+							<div class="desc">
+								<h2>
+									<a th:href="@{'/chi-tiet-san-pham?id=' + ${shoe.id}}"
+										th:title="${shoe.name}"
+										th:text="${#strings.abbreviate(shoe.name,30)}"
+										style="width: 20px; overflow: hidden; text-overflow: ellipsis;">Women's
+										Boots Shoes Maca</a>
+								</h2>
+								<span th:text="'$' +${shoe.price}" class="price">$139.00</span>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p>
+							<a th:href="@{/san-pham}" class="btn btn-primary btn-lg"
+								th:text="#{shopAllProducts}">Shop All Products</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<img class="img-fluid " id="promo-banner-3"
+			src="images/banner/promo-banner-2-lg.png" alt="promo-banner-3">
+
+
+		<div class="colorlib-intro">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<h2 class="intro" th:text="#{shopColection}">SHOES
+							COLLECTIONS</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="colorlib-product">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-1.png);"></a>
+							<div class="desc">
+								<h2>TECH PERFORMANCE</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-2.png);"></a>
+							<div class="desc">
+								<h2>OFF-WHITE</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-3.png);"></a>
+							<div class="desc">
+								<h2>SUPREME</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-4.png);"></a>
+							<div class="desc">
+								<h2>NBA</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-5.png);"></a>
+							<div class="desc">
+								<h2>YEEZY</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img"
+								style="background-image: url(images/categories/category-6.png);"></a>
+							<div class="desc">
+								<h2>Comme Des Garçons</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="colorlib-partner">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2 th:text="#{trustedPartners}">Trusted Partners</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col partner-col text-center">
+						<img src="images/brand-1.jpg" class="img-fluid zoomimg"
+							alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="images/brand-2.jpg" class="img-fluid zoomimg"
+							alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="images/brand-3.jpg" class="img-fluid zoomimg"
+							alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="images/brand-4.jpg" class="img-fluid zoomimg"
+							alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="images/brand-5.jpg" class="img-fluid zoomimg"
+							alt="Free html4 bootstrap 4 template">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- footer -->
+		<div th:replace="common/user/footer.html"></div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+	<div th:replace="common/user/js.html"></div>
+	<script>
+		function showSuccesToast() {
+			toast({
+				title : 'SUCCESS',
+				message : 'Add to cart success !!',
+				type : 'success',
+				duration : 1000
+			});
+		};
+	</script>
+
+</body>
+</html>
